@@ -30,7 +30,7 @@ def get_uid() -> str:
     return unique_code
 
 
-def join(port: int, ip_addr: str) -> 'node.Node':  # The ip_addr and port is for the connection to be made
+def join(port: int, ip_addr: str, testing: bool = False) -> 'node.Node':  # The ip_addr and port is for the connection to be made
     """To make a node join the already instantiated chord network."""
 
     # [INFO] This entire join network function does four connections to the Nodes.
@@ -52,7 +52,7 @@ def join(port: int, ip_addr: str) -> 'node.Node':  # The ip_addr and port is for
     # _LEAVE_REQ = 999
 
     # Create a Node object for the joining machine
-    my_ip_addr, my_port = node.get_ip_port()
+    my_ip_addr, my_port = node.get_ip_port(testing=testing)
 
     # Part-1. A request to ask the provided Node for its Key Space and enKey before joining the network
     # Initial Details Request
@@ -134,12 +134,12 @@ class Chord:
     LOOPBACK_IP = "127.0.0.1"
 
     # Singleton Instance Limit
-    def __new__(cls, network_name: str, port: int = None, ip_addr: str = None, M: int = 9, central_hub: bool = True):
+    def __new__(cls, network_name: str, port: int = None, ip_addr: str = None, M: int = 9, central_hub: bool = True, testing: bool = False):
         if cls.__instance is None:
             cls.__instance = super(Chord, cls).__new__(cls)
         return cls.__instance
 
-    def __init__(self, network_name: str, port: int = None, ip_addr: str = None, M: int = 9, central_hub: bool = True):
+    def __init__(self, network_name: str, port: int = None, ip_addr: str = None, M: int = 9, central_hub: bool = True, testing: bool = False):
         # Type Error Enforcing
         assert isinstance(port, (int, type(None))), f"Expected port to be int or None, got {type(port).__name__}"
         assert isinstance(ip_addr, (str, type(None))), f"Expected ip_addr to be str or None, got {type(ip_addr).__name__}"
@@ -148,7 +148,7 @@ class Chord:
         assert isinstance(central_hub, bool), f"Expected central_hub to be boolean, got {type(central_hub).__name__}"
 
         if ip_addr is None or port is None:
-            ip_addr, port = node.get_ip_port()
+            ip_addr, port = node.get_ip_port(testing=testing)
 
         # Central Hub
         self.__central_hub = central_hub

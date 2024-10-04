@@ -9,6 +9,8 @@ import threading
 import pickle
 from loguru import logger
 from cryptography.fernet import Fernet
+import urllib.request
+# import requests
 
 # Self Imports
 from libChord import chord
@@ -17,11 +19,19 @@ from libChord import chord
 GLOBAL_LOOPBACK_IP = "127.0.0.1"
 
 
-def get_ip_port() -> tuple:
-    """Gets the IP address and port of the client machine."""
-    hostname = socket.gethostname()
-    ip_addr = socket.gethostbyname(hostname)
+def get_ip_port(testing: bool) -> tuple:
+    """Gets the public IP address and port of the client machine."""
+    if testing:
+        hostname = socket.gethostname()  # LOCAL TESTING
+        ip_addr = socket.gethostbyname(hostname)  # LOCAL TESTING
+    else:
+        ip_addr = urllib.request.urlopen('https://v4.ident.me/').read().decode('utf8')
+
+    # Use an external service to get the public IP
+    # public_ip = requests.get('https://api.ipify.org').text
+
     port = 0
+
     return ip_addr, port
 
 

@@ -18,7 +18,7 @@ The protocol ensures that with N nodes in the system, any key lookup operation r
 To achieve efficient lookups, each node maintains a "finger table," which is an array containing information about other nodes in the network. Each entry in this table points to a node that is a specific distance (power of 2) away from the current node. This finger table enables a node to quickly route a query closer to the target key's location, significantly reducing the number of hops required for lookup.
 
 ### Key Lookup
-When a node wants to find a key, it doesn’t search linearly through the ring. Instead, it uses the information in its finger table to leap closer to the target node, effectively halving the remaining distance to the target in each step. This logarithmic lookup process is what gives Chord its efficiency.
+When a node wants to find a key, it does not search linearly through the ring. Instead, it uses the information in its finger table to leap closer to the target node, effectively halving the remaining distance to the target in each step. This logarithmic lookup process is what gives Chord its efficiency.
 
 ## Operations in Chord
 

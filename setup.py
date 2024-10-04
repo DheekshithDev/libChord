@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="libChord",
-    version="1.0.0",
+    version="1.0.1",
     author="Dheekshith Mekala (Arth9r)",
     author_email="dheekshithdev98@gmail.com",
     description="This library offers seamless implementation of Chord Protocol. With just as little as two functions "
