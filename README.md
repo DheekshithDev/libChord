@@ -6,7 +6,7 @@ and retrieval of data across a decentralized network of nodes
 efficiently. It offers a scalable, fault-tolerant, and 
 efficient solution for data storage and lookup in distributed
 systems, ensuring that even as nodes join or leave the network,
-data can still be found and managed correctly.
+data can still be found and managed correctly. https://pypi.org/project/libChord/
 
 ### Consistent Hashing
 Chord uses consistent hashing to assign keys to nodes, which means data and nodes are arranged in a logical ring. Each node and data item is assigned an m-bit identifier, typically derived from hashing their IP address or other identifiers. This identifier determines the node's position in the circular ID space ranging from 0 to \(2^m - 1\). Each key (data item) is stored on the first node whose ID is equal to or follows the key's ID in this circular space.
